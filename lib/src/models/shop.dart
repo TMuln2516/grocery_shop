@@ -25,11 +25,11 @@ class Shop extends ChangeNotifier {
         color: Colors.blue),
   ];
 
-  final List<Item> _customerCart = [];
+  final List _customerCart = [];
 
   //getter
-  List<Item> get shopMenu => _shopMenu;
-  List<Item> get customerCart => _customerCart;
+  get shopMenu => _shopMenu;
+  get customerCart => _customerCart;
 
   void addItem(Item item) {
     customerCart.add(item);
@@ -39,5 +39,13 @@ class Shop extends ChangeNotifier {
   void removeItem(Item item) {
     customerCart.remove(item);
     notifyListeners();
+  }
+
+  String totalPrice() {
+    double total = 0;
+    for (int i = 0; i < customerCart.length; i++) {
+      total += double.parse(_customerCart[i].price);
+    }
+    return total.toStringAsFixed(2);
   }
 }
